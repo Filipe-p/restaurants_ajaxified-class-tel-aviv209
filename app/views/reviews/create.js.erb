@@ -1,0 +1,24 @@
+  // create the HTML for the review
+  newReview = document.getElementById('review_content').value
+  newReviewHTML = '<p>' + newReview + '</p>'
+
+<% if @review.persisted? %>
+    // create the HTML for the review
+    newReview = "<%= j render 'reviews/show', review: @review %>"
+
+    //get the form
+    reviews = document.getElementById('reviews')
+
+    //append the new review to the list
+    reviews.insertAdjacentHTML('beforeend', newReview)
+
+    //Reset the inputbox
+    formReview = document.getElementById('new_review')
+    // Rerebder the form partial with the @review
+    formReview.innerHTML = '<%= j render "reviews/form", restaurant: @restaurant, review: Review.new %>'
+<% else %>
+    //Select the form
+    formReview = document.getElementById('new_review')
+    // Rerebder the form partial with the @review
+    formReview.innerHTML = '<%= j render "reviews/form", restaurant: @restaurant, review: @review %>'
+<% end %>
